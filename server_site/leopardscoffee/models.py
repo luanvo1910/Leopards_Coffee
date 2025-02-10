@@ -11,3 +11,7 @@ class Products(models.Model):
     isValid = CustomBooleanField()
     image = models.ImageField(upload_to=get_file_path)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+
+class Roles(models.Model):
+    name = models.CharField(unique=True, max_length=100)
+

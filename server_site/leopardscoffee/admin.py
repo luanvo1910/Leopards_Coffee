@@ -10,5 +10,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['category', 'isValid']
     search_fields = ['name']
 
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
+
 admin.site.register(Categories, CategoryAdmin)
 admin.site.register(Products, ProductAdmin)
+admin.site.register(Roles, RoleAdmin)
