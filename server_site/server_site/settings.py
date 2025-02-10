@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'leopardscoffee'
 ]
 
 MIDDLEWARE = [
@@ -77,13 +78,18 @@ WSGI_APPLICATION = 'server_site.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'leopards_coffee',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'leopards_coffee',
+    #     'USER': 'root',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
+    # use local database for testing
+   'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } 
 }
 
 # Password validation
