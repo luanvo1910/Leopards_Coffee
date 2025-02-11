@@ -29,7 +29,24 @@ class UserAdmin(admin.ModelAdmin):
     get_role_name.admin_order_field = 'role'
     get_role_name.short_description = 'Role'
 
-admin.site.register(Categories, CategoryAdmin)
-admin.site.register(Products, ProductAdmin)
-admin.site.register(Roles, RoleAdmin)
-admin.site.register(Users, UserAdmin)
+class TableDishInline(admin.TabularInline):
+    model = TableDish
+    extra = 1  
+    autocomplete_fields = ['dish']  
+
+
+@admin.register(Table)
+class TableAdmin(admin.ModelAdmin):
+    list_display = ('number', 'isActive', 'total_price_display') 
+    search_fields = ('number',) 
+    list_filter = ('isActive',)  
+    inlines = [TableDishInline]  
+
+    def total_price_display(self, obj):
+        return f"{obj.total_price()} VND"
+    total_price_display.short_description = "Tổng tiền"
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Dish, ProductAdmin)
+admin.site.register(Role, RoleAdmin)
+admin.site.register(User, UserAdmin)
