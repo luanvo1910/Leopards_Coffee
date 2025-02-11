@@ -34,8 +34,6 @@ class TableDishInline(admin.TabularInline):
     extra = 1  
     autocomplete_fields = ['dish']  
 
-
-@admin.register(Table)
 class TableAdmin(admin.ModelAdmin):
     list_display = ('number', 'isActive', 'total_price_display') 
     search_fields = ('number',) 
@@ -46,7 +44,29 @@ class TableAdmin(admin.ModelAdmin):
         return f"{obj.total_price()} VND"
     total_price_display.short_description = "Tổng tiền"
 
+class BillItemInline(admin.TabularInline):
+    model = BillItem
+    extra = 1
+
+class BillAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'table', 'total_price', 'status', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('user__name', 'table__number')
+    inlines = [BillItemInline]
+
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 1
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'total_price', 'created_at')
+    search_fields = ('user__name',)
+    inlines = [CartItemInline]
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Dish, ProductAdmin)
 admin.site.register(Role, RoleAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Table, TableAdmin)
+admin.site.register(Bill, BillAdmin)
+admin.site.register(Cart, CartAdmin)
