@@ -1,6 +1,7 @@
 from django.apps import AppConfig
 
-
-class LeopardscoffeeConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+class LeopardsCoffeeConfig(AppConfig):
     name = 'leopardscoffee'
+
+    def ready(self):
+        import leopardscoffee.signals
