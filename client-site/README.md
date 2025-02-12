@@ -1,5 +1,9 @@
-## Most Used Folder Structure
+## ## commands:
+- npm i
+- npm start
 
+
+## Most Used Folder Structure
 ```javascript
 React Folder Structure
 .
