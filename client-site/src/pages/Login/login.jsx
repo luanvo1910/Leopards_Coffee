@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "../../components/forms/loginForm";
 import Leocf from "../../assets/icons/leopardcf.svg";
 import Background from "../../assets/image/background.png";
-import { Link } from "react-router-dom";
+import LinkButton from "../../components/buttons/linkButton";
 
 const Login = () => {
   return (
@@ -11,7 +11,9 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
           <img alt="Leopards Coffee" src={Leocf} className="mx-auto h-20 w-auto text-[#B17457]" />
           <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-[#B17457]">LEOPARDS COFFEE</h2>
-          <Link to="/register" className="font-semibold text-[#B17457] hover:underline mt-4">Go to Register</Link>
+          <LinkButton to="/register">
+            Register
+          </LinkButton>
         </div>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm self-center">
           <LoginForm formType="login" />
