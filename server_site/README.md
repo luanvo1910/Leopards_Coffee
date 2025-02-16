@@ -14,11 +14,12 @@
 - `Cập nhật món` PUT /api/dishes/{id}/
 - `Xóa món` DELETE /api/dishes/{id}/
 -   **User API**
-- `Thêm người dùng` POST /api/users/
 - `Lấy danh sách người dùng` GET /api/users/
 - `Lấy người dùng theo ID` GET /api/users/{id}/
 - `Cập nhật người dùng` PUT /api/users/{id}/
 - `Xóa người dùng` DELETE /api/users/{id}/
+- `Đăng nhập` POST /api/users/login/
+- `Đăng kí` POST /api/users/register/
 -   **Category API**
 - `Thêm danh mục` POST /api/categories/
 - `Lấy danh sách danh mục` GET /api/categories/

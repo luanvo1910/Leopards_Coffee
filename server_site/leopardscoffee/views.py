@@ -1,6 +1,9 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.contrib.auth.hashers import check_password
+from rest_framework.authtoken.models import Token
+
 from .models import *
 from .serializers import *
 
@@ -53,6 +56,37 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    @action(detail=False, methods=['post'])
+    def register(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            if isinstance(user, User):
+                try:
+                    token, created = Token.objects.get_or_create(user=user)
+                    return Response({"message": "Đăng ký thành công!", "token": token.key}, status=status.HTTP_201_CREATED)
+                except Exception as e:
+                    print(f"Error while creating token: {e}")
+                    return Response({"error": "Lỗi khi tạo token!"}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({"error": "Lỗi trong việc tạo người dùng, không phải là đối tượng User hợp lệ!"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'])
+    def login(self, request):
+        email = request.data.get("email")
+        password = request.data.get("password")
+
+        try:
+            user = User.objects.get(email=email)
+            if user.check_password(password):
+                token, _ = Token.objects.get_or_create(user=user)
+                return Response({"message": "Đăng nhập thành công!", "token": token.key}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Sai mật khẩu!"}, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({"error": "Email không tồn tại!"}, status=status.HTTP_400_BAD_REQUEST)
 
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
