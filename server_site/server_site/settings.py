@@ -17,6 +17,9 @@ import os
 import pymysql
 pymysql.install_as_MySQLdb()
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'leopardscoffee',
     'rest_framework',
+    'rest_framework.authtoken',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +142,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CLOUDINARY_STORAGE = {
+#     'cloud_name': 'dfz0xsh2d',
+#     'api_key': '276587198856662',
+#     'api_secret': '0_fIzLUJlp0E_X3EAjV5wo4S2DM',
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

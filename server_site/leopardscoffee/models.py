@@ -1,6 +1,9 @@
 from django.db import models
 from .helpers import *
 from .custom_field import *
+from django.contrib.auth.hashers import make_password, check_password
+
+from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(unique=True, max_length=100)
@@ -12,7 +15,7 @@ class Dish(models.Model):
     name = models.CharField(unique=True, max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=3)
     isValid = CustomBooleanField()
-    image = models.ImageField(upload_to=get_product_image_path)
+    image = CloudinaryField('dish_picture', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -28,8 +31,15 @@ class User(models.Model):
     name = models.CharField(unique=True, max_length=100)
     email = models.EmailField(unique=True, max_length=255)
     phone = models.CharField(validators=[phone_regex], max_length=15, unique=True)
-    image = models.ImageField(upload_to=get_user_image_path)
-    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True) 
+    password = models.CharField(max_length=255, default="defaultpassword")
+    image = CloudinaryField('profile_picture', blank=True, null=True)
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
 
     def __str__(self):
         return self.name
@@ -114,3 +124,8 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity}x {self.dish.name} in {self.cart.id}"
+    
+class Token(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    key = models.CharField(max_length=255, unique=True)
+    created = models.DateTimeField(auto_now_add=True)

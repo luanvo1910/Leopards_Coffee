@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from cloudinary.models import CloudinaryField
 
 class TableSerializer(serializers.ModelSerializer):
     total_price = serializers.SerializerMethodField()
@@ -12,6 +13,7 @@ class TableSerializer(serializers.ModelSerializer):
         return obj.total_price()
 
 class DishSerializer(serializers.ModelSerializer):
+    image_url = serializers.CharField(source='image.url', read_only=True)
     class Meta:
         model = Dish
         fields = '__all__'
@@ -50,6 +52,15 @@ class CartSerializer(serializers.ModelSerializer):
         return obj.total_price()
 
 class UserSerializer(serializers.ModelSerializer):
+    image = CloudinaryField('profile_picture')
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'name', 'email', 'phone', 'password', 'image', 'role']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
