@@ -1,11 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
-const LinkButton = ({ to, children, className }) => {
+const LinkButton = ({ type = "button", onClick, children, className }) => {
   return (
-    <Link to={to} className={`text-sm text-[#B17457] hover:underline ${className}`}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={`text-[#B17457] hover:underline text-sm ${className}`}
+    >
       {children}
-    </Link>
+    </button>
   );
 };
 
