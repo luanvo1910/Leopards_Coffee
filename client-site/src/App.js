@@ -1,8 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/auth";
-import Home from "./pages/Home/index"
-import Menu from "./pages/Menu/menu"
+import Home from "./pages/Home/index";
+import Menu from "./pages/Menu/menu";
+
+import Staff from "./pages/Staff/index";
+import Dashboard from "./pages/Staff/Dashboard";
+import TableManage from "./pages/Staff/Table/TablesManage";
+import DishesManage from "./pages/Staff/DishesManage";
+import BillsManage from "./pages/Staff/BillsManage";
+
 
 const App = () => {
   return (
@@ -11,6 +18,13 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
+
+        <Route path="/staff" element={<Staff />}>
+          <Route index element={<Dashboard />} />
+          <Route path="tables" element={<TableManage />} />
+          <Route path="dishes" element={<DishesManage />} />
+          <Route path="bills" element={<BillsManage />} />
+        </Route>
       </Routes>
     </Router>
   );
