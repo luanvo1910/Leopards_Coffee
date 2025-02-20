@@ -27,21 +27,29 @@ const tables = [
 const TableManage = () => {
   const [selectedTable, setSelectedTable] = useState(null);
 
+  const handleShowTableDetails = (table) => {
+    setSelectedTable(table);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTable(null);
+  };
+
   return (
     <div>
       <div className="flex-1 p-8 grid grid-cols-2 gap-6">
         {tables.map((table) => (
           <Table
             key={table.id}
-            table={table}
-            onShowDetails={setSelectedTable}
+            tableData={table}
+            onShowDetails={handleShowTableDetails}
           />
         ))}
       </div>
       {selectedTable && (
         <TableDetailsModal
           table={selectedTable}
-          onClose={() => setSelectedTable(null)}
+          onClose={handleCloseModal}
         />
       )}
     </div>

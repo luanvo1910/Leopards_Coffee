@@ -1,6 +1,8 @@
 import React from "react";
 
 const TableDetailsModal = ({ table, onClose }) => {
+  const total = table.orders.reduce((sum, order) => sum + order.price, 0);
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-96">
@@ -14,7 +16,7 @@ const TableDetailsModal = ({ table, onClose }) => {
           ))}
         </ul>
         <div className="font-bold mt-4">
-          Total: {table.orders.reduce((sum, order) => sum + order.price, 0)} VND
+          Total: {total} VND
         </div>
         <div className="mt-4 flex justify-end space-x-2">
           <button
