@@ -5,7 +5,7 @@ const LinkButton = ({ type = "button", onClick, children, className }) => {
     <button
       type={type}
       onClick={onClick}
-      className={`text-[#B17457] hover:underline text-sm ${className}`}
+      className={`text-secondary hover:underline text-sm ${className}`}
     >
       {children}
     </button>
