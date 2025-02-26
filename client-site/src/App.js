@@ -9,6 +9,7 @@ import Dashboard from "./pages/Staff/Dashboard";
 import TableManage from "./pages/Staff/Table/TablesManage";
 import DishesManage from "./pages/Staff/DishesManage";
 import BillsManage from "./pages/Staff/BillsManage";
+import StaffCheckout from "./pages/Staff/Checkout"
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="tables" element={<TableManage />} />
           <Route path="dishes" element={<DishesManage />} />
           <Route path="bills" element={<BillsManage />} />
+          <Route path="checkout" element={<StaffCheckout />} />
         </Route>
       </Routes>
     </Router>
