@@ -10,9 +10,9 @@ const Table = ({ tableData, onShowDetails }) => {
       onClick={() => onShowDetails(tableData)}
     >
       <div>
-        <h2 className="text-lg text-secondary font-bold">Table {id}</h2>
+        <h2 className="text-lg font-bold">Table {id}</h2>
         {orders.length > 0 ? (
-          <ul className="text-secondary text-sm">
+          <ul className="text-sm">
             {orders.map((order, index) => (
               <li key={index}>
                 {order.name} - {order.price.toLocaleString("vi-VN")} VND
@@ -20,10 +20,10 @@ const Table = ({ tableData, onShowDetails }) => {
             ))}
           </ul>
         ) : (
-          <p className="text-secondary">Trống</p>
+          <p>Trống</p>
         )}
         {orders.length > 0 && (
-          <p className="font-bold text-secondary mt-2">
+          <p className="font-bold mt-2">
             Total: {totalAmount.toLocaleString("vi-VN")} VND
           </p>
         )}
