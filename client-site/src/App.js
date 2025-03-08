@@ -7,7 +7,7 @@ import Menu from "./pages/Menu/Menu";
 import Staff from "./pages/Staff/index";
 import Dashboard from "./pages/Staff/Dashboard";
 import TableManage from "./pages/Staff/Table/TablesManage";
-import DishesManage from "./pages/Staff/DishesManage";
+import DishesManage from "./pages/Staff/Dish/DishesManage";
 import BillsManage from "./pages/Staff/BillsManage";
 import StaffCheckout from "./pages/Staff/Checkout"
 
