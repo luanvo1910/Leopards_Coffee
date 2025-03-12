@@ -6,11 +6,15 @@ import Sidebar from "../../components/sidebar/Sidebar";
 const StaffLayout = () => {
   return (
     <div
-      className="flex h-screen"
-      style={{ backgroundImage: `url(${Background})`, backgroundSize: "cover" }}
+      className="flex min-h-screen"
+      style={{
+        backgroundImage: `url(${Background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       <Sidebar />
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 overflow-auto">
         <Outlet />
       </div>
     </div>
